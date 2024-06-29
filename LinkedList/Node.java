@@ -1,22 +1,24 @@
 package LinkedList;
 
+import Business.Business;
+
 public class Node {
-    private Object data;
+    private Business business;
     private Node next; //reference to next node
 
 
-    public Node(Object data){
-        this.data = data;
+    public Node(Business business){
+        this.business = business;
         this.next = null;
     }
 
     //getters and setters by Object Data
-    public Object getData() {
-        return data;
+    public Business getBusiness() {
+        return business;
     }
 
-    public void setData(Object data) {
-        this.data = data;
+    public void setData(Business business) {
+        this.business = business;
     }
 
     //getters and setter by Node next

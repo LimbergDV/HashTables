@@ -1,5 +1,7 @@
 package LinkedList;
 
+import Business.Business;
+
 public class LinkedList {
     private Node head;
     private int count;
@@ -9,8 +11,8 @@ public class LinkedList {
         this.head = null;
     }
 
-    public void push(Object Data){
-        Node node = new Node(Data);
+    public void push(Business business){
+        Node node = new Node(business);
 
         if(this.head == null){
             this.head = node;
@@ -27,13 +29,13 @@ public class LinkedList {
     }
 
 
-    public Object getElementAt(int index){
+    public Business getElementAt(int index){
         if (index >= 0 && index<this.count){
             Node node = this.head;
             for(int i = 0;i<index && node != null; i++ ){
                 node = node.getNext();
             }
-            return node.getData();
+            return node.getBusiness();
         }
 
         return null;

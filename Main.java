@@ -1,5 +1,5 @@
+import Business.Business;
 import HashTable.HashTable;
-import HashTable.HashTable2;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -26,7 +26,7 @@ public class Main {
             Scanner scanner = new Scanner(System.in);
 
             HashTable division = new HashTable(1);
-            HashTable2 multiplication = new HashTable2(2);
+            //HashTable2 multiplication = new HashTable2(2);
 
             int option;
             boolean flag = true;
@@ -42,20 +42,20 @@ public class Main {
 
                 switch (option){
                     case 1:
-                        double time = readDataSet(division);
-                        System.out.println("¡Éxito! El tiempo de espera de método de división en procesar los datos fue de: " + time);
+                        readDataSet(division);
+                        System.out.println("¡Éxito! El tiempo de espera de método de división en procesar los datos fue de: ");
                         break;
                     case 2:
-                        time = readDataSet2(multiplication);
-                        System.out.println("¡Éxito! El tiempo de espera método de multiplicación en procesar los datos fue de: " + time);
+                        //time = readDataSet(multiplication);
+                        System.out.println("¡Éxito! El tiempo de espera método de multiplicación en procesar los datos fue de: ");
                         break;
                     case 3:
-                        time = getElementAt(division);
-                        System.out.println("¡Éxito! El tiempo de espera de búsqueda en división fue de: " + time);
+                        getElementAt(division);
+                        System.out.println("¡Éxito! El tiempo de espera de búsqueda en división fue de: ");
                         break;
                     case 4:
-                        time = getElementAt2(multiplication);
-                        System.out.println("¡Éxito! El tiempo de espera de búsqueda en división fue de: " + time);
+                        //time = getElementAt(multiplication);
+                        System.out.println("¡Éxito! El tiempo de espera de búsqueda en multiplicación fue de: ");
                         break;
 
                     case 5:
@@ -84,12 +84,13 @@ public class Main {
                 {
                     String[] bussines = line.split(splitBy);    // use comma as separator
                     //System.out.println("["+id+"] Bussines [ID=" + bussines[0] + ", Name=" + bussines[1] + ", Address=" + bussines[2] + ", City=" + bussines[3] + ", State= " + bussines[4] +"]");
-                    ht.add(bussines[0],bussines[1] + bussines[2] + bussines[3] + bussines[4]);
+                    Business business = new Business(bussines[0], bussines[1],  bussines[2], bussines[3],  bussines[4]);
+                    ht.add(bussines[0],business); //clave valor
                     id++;
                 }
                 long finalTime = System.nanoTime();
                 long durationTime = setTime - finalTime;
-                double seconds = durationTime / 1_000_000_000;
+                double seconds = durationTime / 1_000_000;
                 return seconds;//convert to seconds
 
             }
@@ -107,7 +108,13 @@ public class Main {
             key = scanner.nextLine();
 
             long setTime = System.nanoTime();
-            ht.search(key);
+            Business business = ht.search(key);
+            if (business == null){
+                System.out.println("No encontrado :(");
+            }
+            else {
+                System.out.println("Data object found: " + "\n" + "Id: "+ business.getId() +  "\n" + "Name: " + business.getName() +  "\n" +"Address: " + business.getAdress() +  "\n" +"City: " + business.getCity() +  "\n" +"State: " + business.getState());
+            }
             long finalTime = System.nanoTime();
             long durationTime = setTime - finalTime;
             double seconds = durationTime / 1_000_000_000;
@@ -117,7 +124,7 @@ public class Main {
 
 
 
-    public static double readDataSet2(HashTable2 ht){
+    /*public static double readDataSet2(HashTable ht){
         String line = "";
         String splitBy = ",";
         int id=1;
@@ -143,9 +150,9 @@ public class Main {
             e.printStackTrace();
             return 0;
         }
-    }
+    }*/
 
-    public static double getElementAt2(HashTable2 ht){
+    /*public static double getElementAt2(HashTable2 ht){
         Scanner scanner = new Scanner(System.in);
         String key;
         System.out.println("Proporcione el id, por favor: ");
@@ -158,7 +165,7 @@ public class Main {
         double seconds = durationTime / 1_000_000_000;
         return seconds;
 
-    }
+    }*/
 
 
 

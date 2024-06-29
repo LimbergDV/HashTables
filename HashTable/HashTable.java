@@ -1,5 +1,7 @@
 package HashTable;
 
+
+import Business.Business;
 import LinkedList.LinkedList;
 
 public class HashTable {
@@ -30,22 +32,22 @@ public class HashTable {
     //TODO hashTables methods for division and multiplication :D
 
     private int methodDivision (int value){
-        int hash = ((value & 0x7fffffff) % this.size);
+        int hash = (value % this.size);
         return hash;
     }
 
-    /*private int methodMultiplication (int value){
+    private int methodMultiplication (int value){
         final double A = (Math.sqrt(5)-1)/2; //Constante
         double hasheo = (this.size*(value*A % 1));
         return (int) hasheo;
-    }*/
+    }
 
-    public void add(String key, Object data){
+    public void add(String key, Business business){
         int keyToInt = this.convertToAscii(key);
 
         if (keyToInt >= 0){
             int hasheo = methodDivision(keyToInt);
-            this.table[hasheo].push(data);
+            this.table[hasheo].push(business);
         }
         else {
             System.out.println("Hubo un error al agregar");
@@ -54,18 +56,24 @@ public class HashTable {
 
     }
 
-    public void search(String key){
+    public Business search(String key){
         int keyToInt = this.convertToAscii(key);
 
         if (keyToInt >= 0){
             int hasheo = methodDivision(keyToInt);
             for (int i=0; i<this.table[hasheo].size();i++){
-                System.out.println(this.table[hasheo].getElementAt(i));
+                Business business = this.table[hasheo].getElementAt(i);
+                if (business.getId().equals(key)){
+                    return business;
+                }
+
             }
         }
-        else {
-            System.out.println("Hubo un error al agregar");
-        }
+        return null;
     }
+
+
+
+
 
 }
